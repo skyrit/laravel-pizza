@@ -18,7 +18,7 @@ class CreatePizzasTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('small_pizza_price');
-            $table->integer('medium_pizz_price');
+            $table->integer('medium_pizza_price');
             $table->integer('large_pizza_price');
             $table->string('category');
             $table->string('image');
