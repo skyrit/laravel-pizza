@@ -36,4 +36,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     //user order
     Route::get('/user/order', [UserOrderController::class, 'index'])->name('user.order');
     Route::post('/user/{id}/status', [UserOrderController::class, 'changestatus'])->name('order.status');
+
+    //display all customers
+    Route::get('/customers', [UserOrderController::class, 'customers'])->name('customers');
 });

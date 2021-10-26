@@ -1,0 +1,134 @@
+composer create-project laravel/laravel pizza
+cd pizza
+composer require laravel/ui
+php artisan ui bootstrap--auth
+npm install && npm run dev
+code .
+Goto .env to make sure the database name
+Goto database create a new database (pizza)
+Goto app\databse\migrations\create_users_table to edit the attribute for the table
+php artisan migrate
+
+php artisan make:controller PizzaController
+Goto web.php to add the route to the PizzaController
+Goto resource\layout create new folder (pizza) and new file (index.blade.php)
+Copy the code from home.blade.php to index.blade.php and edit the display content
+
+**push the project to github
+Create new repository in github
+git init
+git add .
+git commit -m "Laravel Project"
+git remote add origin https://github.com/skyrit/laravel-pizza.git
+git branch -M main
+git push -u origin main
+//Goto cloudways to create new servers
+//click the www and click deployment via Git and generate ssh key view ssh key and copy
+//Goto github, setting, deploy keys and paste the key, then goto code, and copy the link from ssh
+//Goto cloudways and paste the link at git remote address and authentigate, chose the main and start deployment
+
+php artisan make:model Pizza -m
+Goto Create_pizza_table to edit the attribute for the pizza table
+php artisan migrate
+Goto web.php to edit the route for the index and create route
+Rename index.blade.php to create.blade.php
+Goto PizzaController to change the return view for create() function
+Goto pizza\create.blade.php to add the form function
+php artisan make:Request PizzaStoreRequest
+Goto PizzaStoreRequest.php to change the authorize to true and the rule
+Goto PizzaController.php to edit the store() function
+Goto pizza\create.blade.php to add the error function
+git add.
+git commit -m "validation added"
+git push
+Goto model\pizza.php to add the protected $guarded=[];
+Goto PizzaController.php to edit the store() functions and add the return views for index
+Create new file ('index.blade.php')
+Separate the new file for the side code and add @include('pizza.side')
+Copy the code from home.blade.php to index.blade.php and edit for the side code and edit the content code
+Goto pizzaController.php edit the index() function to pass all the pizza data to index
+git add .
+git commit -m "Admin Part"
+git push
+
+Goto PizzaController.php to edit the edit() function
+Goto web.php to add the route to the edit page
+Goto pizza\index.blade.php to add the href for the edit button
+Create new file (edit.blade.php) in pizza folder
+Copy the code from create.blade.php to edit.blade.php and add the value for the form and edit the form tag and add the method
+Goto web.php to add the route for update data
+Goto PizzaController.php to edit the update() function
+
+Goto pizza\index.blade.php to add the bootstrap and the model for delete button and the model
+Goto web.php add the route for the delete
+Goto PizzaController.php edit the destroy() function
+
+Goto PizzaController.php, index() function change the all to paginator(5)
+Goto pizza\index.blade.php after the table, add the {{$pizzas->links()}}
+Goto AppServiceProvider.php add Paginator::useBootstrap(); in boot() function and add use Illuminate\Pagination\Paginator;
+Goto pizza\index.blade.php add the button to Create pizza
+git add .
+git commit -m "Admin Part"
+git push
+
+php artisan make:middleware Admin
+Goto HTTP\Middleware\Admin.php, add the if statement in the handle() function for admin return view
+Goto Kernel.php, $routeMiddleware to register for the admin middleware
+Goto web.php add the route::group to make sure the user login
+Goto database\seeders\databaseseeder.php edit the run() function for the admin data
+Goto Models\User.php, in the $fillable, add 'is_admin'
+php artisan db:seed
+git add .
+git commit -m "Middleware add"
+git push
+
+Goto pizza\index.blade.php to add the sidebar and the link for user order
+Goto web.php to add the route for the user.order
+php artisan make:model Order -m
+php artisan make:controller UserOrderController -r
+Goto UserOrderController.php to edit the index() function to return the view
+Goto resources\views create new folder (order) and new file (index.blade.php)
+Copy the code from home.blade.php to order\index.blade.php and edit the title
+Goto create_order_table to edit the attribute 
+php artisan migrate
+Goto index.blade.php to edit the content 
+Goto UserOrderController.php to edit the index() function to pass the order data
+Goto Models\Order.php to add the user() function
+Goto order\index.blade.php to add the button about the status
+Goto web.php to add the route to changestatus for the order
+Goto UserOrderController.php to add changestatus() function to update the status
+Goto order\index.blade.php to add the total price for the order
+php artisan make:migration add_phone_to_orders
+Goto migrations\add_phone_to_order edit the up() function and down() function
+php artisan migrate
+Goto index.blade.php to add the phone display
+git add .
+git commit -m "admin orders dashboard"
+git push
+
+php artisan make:controller FrontendController
+Goto FrontendController.php to add the index() function
+Create new file (fronpage.blade.php)
+Goto web.php to add the route for the frontpage
+Goto frontpage.blade.php copy the code from home.blade.php and edit the contet for the menu and pizza and add the <style>
+Goto web.php to add the route to show the pizza details
+Goto FrontendController.php to add the show() function and pass the certain pizza information to the page
+Goto frontpage.blade.php to add the href for the button
+Copy the code from frontpage.blade.php to show.blade.php and edit for the menu and the content for the display
+Goto show.blade.php add the form action route for the order form
+Goto web.php to add the route to store the order data
+Goto order.php add protected $guarded=[];
+Goto FrontendController.php to add the store() function
+Goto web.php to fix the route for the admin to get the pizza data and order data
+Goto HomeController.php to edit the index() function to return the page for the user
+Goto home.blade.php and copy the code from order\show.blade.php and delete the unncessary code
+Goto frontendController.php to edit the index() function to add the if statement about the category
+Goto frontpage.blade.php to edit the menu part to filter the display part
+git add .
+git commit -m "user part"
+git push
+Goto app.blade.php to add the if statement in the dropdown menu to show the order
+Goto web.php to add the route to show all the customer
+Goto UserOrderController.php to add customers() function that pass the data of user that is not admin
+Create new file (customers.blade.php)
+Goto customer.blade.php and copy the code from order\index.blade.php and delete the unncessary code and edit the display content
